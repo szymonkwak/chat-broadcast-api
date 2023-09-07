@@ -5,9 +5,9 @@ function App() {
   const [activeConversation, setActiveCoversation] = useState<string | null>(null);
 
   return (
-    <div>
+    <div className='flex'>
       <ChatSidebar setActiveCoversation={setActiveCoversation} />
-      <ChatWindow />
+      <ChatWindow activeConversation={activeConversation} />
     </div>
   );
 }
