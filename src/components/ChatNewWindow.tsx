@@ -3,22 +3,21 @@ import { ChatWindow } from '.';
 import { mockUsers } from '../mocks';
 
 interface ChatNewWindowProps {
-  convId: string;
-  handleCloseChatWindow: (convId: string) => void;
+  chatId: string;
+  handleCloseChatWindow: (chatId: string) => void;
 }
 
 const ChatNewWindow = (props: ChatNewWindowProps) => {
-  const { convId, handleCloseChatWindow } = props;
+  const { chatId, handleCloseChatWindow } = props;
 
   return (
     <NewWindow
-      key={convId}
-      title={`Chat with ${mockUsers.find((user) => user.id === convId)?.name}`}
+      title={`Chat with ${mockUsers.find((user) => user.id === chatId)?.name}`}
       features={{ width: 400, height: 600 }}
-      onUnload={() => handleCloseChatWindow(convId)}
+      onUnload={() => handleCloseChatWindow(chatId)}
     >
       <div className="flex bg-neutral-900 h-full">
-        <ChatWindow activeConversation={convId} />
+        <ChatWindow activeChatId={chatId} />
       </div>
     </NewWindow>
   );

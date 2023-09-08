@@ -4,11 +4,11 @@ import { Message, mockUsers } from '../mocks';
 const users = mockUsers;
 
 interface ChatSidebarProps {
-  setActiveCoversation: React.Dispatch<React.SetStateAction<string | null>>;
+  setActiveChatId: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 const ChatSidebar = (props: ChatSidebarProps) => {
-  const { setActiveCoversation } = props;
+  const { setActiveChatId: setActiveCoversation } = props;
 
   const getLastMsg = (messages: Message[]) => {
     return messages.find((msg) => msg.date === max(messages.map((message) => new Date(message.date))).toISOString());

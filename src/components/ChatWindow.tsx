@@ -1,11 +1,11 @@
 import { mockUsers } from '../mocks';
 
 interface ChatWindowProps {
-  activeConversation: string | null;
+  activeChatId: string | null;
 }
 
 const ChatWindow = (props: ChatWindowProps) => {
-  const { activeConversation } = props;
+  const { activeChatId: activeConversation } = props;
 
   const user = mockUsers.find((user) => user.id === activeConversation);
 

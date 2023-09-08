@@ -1,37 +1,33 @@
 import { useState } from 'react';
-import { ChatNoConversation, ChatSidebar, ChatWindow, OpenChatWindowIcon } from './components';
+import { NoConversationInfo, ChatSidebar, ChatWindow, OpenChatWindowIcon } from './components';
 import ChatNewWindow from './components/ChatNewWindow';
 
-function App() {
-  const [activeConvId, setActiveCovId] = useState<string | null>(null);
+const App = () => {
+  const [activeChatId, setActiveChatId] = useState<string | null>(null);
   const [openedChatWindows, setOpenedChatWindows] = useState<string[]>([]);
 
-  const handleOpenChatWindow = (convId: string) => {
-    setOpenedChatWindows((prev) => prev.concat(convId));
-  };
+  const handleOpenChatWindow = (chatId: string) => setOpenedChatWindows((prev) => prev.concat(chatId));
 
-  const handleCloseChatWindow = (convId: string) => {
-    const updatedChats = openedChatWindows.filter((chat) => chat !== convId);
-    setOpenedChatWindows(updatedChats);
-  };
+  const handleCloseChatWindow = (chatId: string) =>
+    setOpenedChatWindows(openedChatWindows.filter((id) => id !== chatId));
 
   return (
     <div className="flex">
-      <ChatSidebar setActiveCoversation={setActiveCovId} />
-      {activeConvId ? (
+      <ChatSidebar setActiveChatId={setActiveChatId} />
+      {activeChatId ? (
         <>
-          <ChatWindow activeConversation={activeConvId} />
-          <OpenChatWindowIcon onClick={() => handleOpenChatWindow(activeConvId)} />
+          <ChatWindow activeChatId={activeChatId} />
+          <OpenChatWindowIcon onClick={() => handleOpenChatWindow(activeChatId)} />
         </>
       ) : (
-        <ChatNoConversation />
+        <NoConversationInfo />
       )}
 
-      {openedChatWindows.map((convId) => (
-        <ChatNewWindow convId={convId} handleCloseChatWindow={handleCloseChatWindow} />
+      {openedChatWindows.map((id) => (
+        <ChatNewWindow key={id} chatId={id} handleCloseChatWindow={handleCloseChatWindow} />
       ))}
     </div>
   );
-}
+};
 
 export default App;
