@@ -43,7 +43,7 @@ const ChatWindow = (props: ChatWindowProps) => {
           </svg>
         </button>
 
-        <input type="text" placeholder='type a message' className="p-2 grow rounded-md text-black focus-visible:border-none" />
+        <input type="text" placeholder='type a message' className="p-2 grow rounded-md text-black" />
 
         <button>
           <svg
