@@ -1,13 +1,29 @@
+import { useState } from 'react';
+import { useBroadcastChannel } from '../hooks';
 import { mockUsers } from '../mocks';
 
 interface ChatWindowProps {
-  activeChatId: string | null;
+  chatId: string;
 }
 
 const ChatWindow = (props: ChatWindowProps) => {
-  const { activeChatId: activeConversation } = props;
+  const { chatId } = props;
 
-  const user = mockUsers.find((user) => user.id === activeConversation);
+  const [msg, setMsg] = useState('');
+
+  const user = mockUsers.find((user) => user.id === chatId);
+
+  const { sendMessage } = useBroadcastChannel();
+
+  const handleSendMessage = () => {
+    sendMessage({
+      msgId: crypto.randomUUID(),
+      date: new Date().toISOString(),
+      from: 'user-K-id',
+      to: chatId,
+      msg,
+    });
+  };
 
   return (
     <div className="flex-1 flex flex-col justify-end">
@@ -43,9 +59,15 @@ const ChatWindow = (props: ChatWindowProps) => {
           </svg>
         </button>
 
-        <input type="text" placeholder='type a message' className="p-2 grow rounded-md text-black" />
+        <input
+          type="text"
+          value={msg}
+          onChange={(e) => setMsg(e.target.value)}
+          placeholder="type a message"
+          className="p-2 grow rounded-md text-black"
+        />
 
-        <button>
+        <button onClick={handleSendMessage}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

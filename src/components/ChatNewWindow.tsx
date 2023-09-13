@@ -17,7 +17,7 @@ const ChatNewWindow = (props: ChatNewWindowProps) => {
       onUnload={() => handleCloseChatWindow(chatId)}
     >
       <div className="flex bg-neutral-900 h-full">
-        <ChatWindow activeChatId={chatId} />
+        <ChatWindow chatId={chatId} />
       </div>
     </NewWindow>
   );
